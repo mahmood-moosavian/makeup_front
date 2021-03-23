@@ -68,7 +68,7 @@ export default {
     },
     strategies: {
       laravelPassportPasswordGrant: {
-        name: 'laravelPassportPassword',
+        name: 'authMakeup',
         provider: 'laravel/passport',
         url: '/backend',
         endpoints: {

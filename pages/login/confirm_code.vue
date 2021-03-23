@@ -139,7 +139,7 @@ export default {
         forget_pass: this.forget_pass
       };
       try {
-        let response = await this.$auth.loginWith("laravelPassportPassword", {
+        let response = await this.$auth.loginWith("authMakeup", {
           data: params
         });
         console.log(response);
