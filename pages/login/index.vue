@@ -12,7 +12,7 @@
                 <span class="text-cyan_darkeset"> شماره موبایل خود را وارد کنید:</span>
             </div>
             <div class="flex">
-                <input maxlength="11" class="h-10 w-full border text-cyan_darkeset_200 rounded-sm px-3 focus:outline-none my-4" type="text" name="" v-model="mobile">
+                <input maxlength="11" :class="{'border-red-700':errors.mobile}" class="h-10 w-full border text-cyan_darkeset_200 rounded-sm px-3 focus:outline-none my-4" type="text" name="" v-model="mobile">
             </div>
             <div class="flex flex-row justify-between mb-2">
                 <button @click="cancel()" class="text-cyan_darker text-md focus:outline-none">انصراف</button>
@@ -26,9 +26,9 @@
                 </button>
 
             </div>
-            <div v-if="errors.length" class="text-sm text-right">
-                <div v-for="error in errors" class="text-red-600" :key="error">
-                * {{ error }}
+            <div v-if="errors.mobile" class="text-sm text-right">
+                <div class="text-red-600">
+                * {{ errors.mobile[0] }}
                 </div>
             </div>
         </div>
@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  auth: 'guest',
   transition: {
     name: 'page',
     mode: 'out-in'
@@ -44,7 +45,7 @@ export default {
     data() {
         return {
             mobile: null,
-            errors:[],
+            // errors:[],
             loading:false,
         }
     },
@@ -55,34 +56,31 @@ export default {
         authenticate(){
             this.loading = true
             const params = { mobile: this.mobile }
-            
-            this.$axios.post('/api/v1/entermobile', params).then(response =>{
+
+            this.$axios.post('backend/api/v1/entermobile', params).then(response =>{
                     if(response.status === 201){
-                        this.$router.push({name: '/login/confirm_code', params})
+                        this.$router.push({name: 'login-confirm_code', params})
                     }
                     else if(response.status === 200){
                         this.$router.push({name: 'enter.password', params})
                     }
 
                 }).catch(error =>{
-                    this.errors = [];
+                    // this.errors = [];
                     if (error.response.status === 422 ) {
-                        this.errors = error.response.data.errors.mobile;
+                        // this.errors = error.response.data.errors.mobile;
                     }
                     if (error.response.status === 404) {
                         this.$router.push('/404');
                     }
                     if (error.response.status === 500) {
+                      // this.errors = ''
                     }
 
                 }).finally(() =>{
                     this.loading = false;
                 })
-            setTimeout(()=>{
-                this.loading = false
-                this.$router.push('/login/confirm_code')
-            },2000)
-            
+
         }
 
     },

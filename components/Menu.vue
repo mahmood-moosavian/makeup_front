@@ -144,15 +144,6 @@ export default {
 </script>
 
 <style>
-.NuxtLogo {
-  animation: 1s appear;
-}
-
-@keyframes appear {
-  0% {
-    opacity: 0.8;
-  }
-}
 html {
   direction: rtl;
   font-size: 0.8em !important;
