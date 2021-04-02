@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  auth: 'guest',
+  middleware: 'auth',
   transition: {
     name: 'page',
     mode: 'out-in'

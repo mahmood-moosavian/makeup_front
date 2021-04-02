@@ -65,6 +65,8 @@ export default {
   auth: {
     redirect: {
       home: '/profile',
+      login: '/profile',
+      logout: '/',
     },
     strategies: {
       laravelPassportPasswordGrant: {

@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  layout:'user',
   middleware: 'auth',
 
   // async fetch() {
@@ -24,3 +25,6 @@ export default {
 
 }
 </script>
+<style>
+
+</style>
