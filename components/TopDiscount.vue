@@ -8,7 +8,7 @@
         <nuxt-link class=" rounded-2xl bg-pink-800 text-white p-5" to="/">مشاهده همه</nuxt-link>
       </div>
       <div class="container mx-auto grid grid-cols-4 gap-2">
-        <nuxt-link to="/user/login"  class="flex flex-col rounded-2xl h-auto p-2 bg-gray-200 my-4 col-span-4 md:col-span-1 sm:col-span-2 relative">
+        <nuxt-link to="/login"  class="flex flex-col rounded-2xl h-auto p-2 bg-gray-200 my-4 col-span-4 md:col-span-1 sm:col-span-2 relative">
           <div class="bg-pink-200 flex rounded-lg justify-center items-center relative">
             <img class="rounded-lg h-56" src="~/assets/pictures/pic1.jpg" alt />
             <div class="flex w-10 flex-col absolute top-0 left-0 ml-4 mt-4 opacity-25 hover:opacity-100  transition duration-300 ease-in-out hover:-translate-y-1">
@@ -222,10 +222,10 @@ export default {
     },
     methods: {
       mouseOver: function(){
-          this.hoverCard = true;   
+          this.hoverCard = true;
       },
       mouseLeave: function(){
-          this.hoverCard = false;   
+          this.hoverCard = false;
       }
     }
 };

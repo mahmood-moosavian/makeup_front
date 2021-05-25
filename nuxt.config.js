@@ -46,6 +46,11 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth-next',
   ],
+  pwa: {
+    manifest: {
+      lang: 'en'
+    }
+  },
 
   axios: {
     proxy: true,
@@ -56,11 +61,6 @@ export default {
       target: process.env.API_URL,
       pathRewrite: { '^/backend': '/' },
     },
-  },
-  pwa: {
-    manifest: {
-      lang: 'en'
-    }
   },
   auth: {
     redirect: {
