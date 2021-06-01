@@ -6,6 +6,7 @@
 
 html {
     font-family: "IranSans";
+    direction: rtl;
 }
 .NuxtLogo {
   animation: 1s appear;

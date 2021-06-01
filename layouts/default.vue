@@ -32,7 +32,7 @@
           </div>
           <div class="mx-6">
             <div>
-              <template v-if="!this.$auth.loggedIn">
+              <template v-if="!false/*this.$auth.loggedIn*/">
                 <nuxt-link to="/login">
                   <span>ورود</span>
                 </nuxt-link>
@@ -219,7 +219,7 @@ export default {
       this.showMenu = false;
     },
     async logout(){
-      await this.$auth.logout();
+      // await this.$auth.logout();
     }
   }
 };

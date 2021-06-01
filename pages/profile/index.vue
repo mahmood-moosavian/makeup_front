@@ -1,13 +1,12 @@
 <template>
   <div>
     <h1>User Page</h1>
-    {{loggedInUser}}
+    {{}}
   </div>
 </template>
 <script>
 export default {
   layout:'user',
-  middleware: 'auth',
 
   // async fetch() {
   //   await this.$auth
@@ -20,7 +19,7 @@ export default {
     }
   },
   mounted(){
-    this.loggedInUser = this.$auth.user.data
+    // this.loggedInUser = this.$auth.user.data
   }
 
 }
