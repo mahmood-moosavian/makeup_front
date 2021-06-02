@@ -32,7 +32,7 @@
           </div>
           <div class="mx-6">
             <div>
-              <template v-if="!false/*this.$auth.loggedIn*/">
+              <template v-if="!isAuthenticated">
                 <nuxt-link to="/login">
                   <span>ورود</span>
                 </nuxt-link>
@@ -144,6 +144,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -219,8 +220,11 @@ export default {
       this.showMenu = false;
     },
     async logout(){
-      // await this.$auth.logout();
+      await this.$store.dispatch('auth/logout');
     }
+  },
+  computed:{
+    ...mapGetters('auth',['isAuthenticated'])
   }
 };
 </script>

@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>User Page</h1>
-    {{}}
+    {{getDisplayName}}
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   layout:'user',
 
@@ -18,9 +19,10 @@ export default {
       loggedInUser: null,
     }
   },
-  mounted(){
-    // this.loggedInUser = this.$auth.user.data
-  }
+  computed:{
+    ...mapGetters('profile',['getDisplayName'])
+  },
+
 
 }
 </script>

@@ -9,11 +9,15 @@
         <img width="100" height="50" src="/images/logo.svg" alt="logo" />
       </div>
     </div>
-    <div class="sm:max-w-sm flex flex-col sm:border rounded-sm mx-auto mt-6 p-5">
+    <div
+      class="sm:max-w-sm flex flex-col sm:border rounded-sm mx-auto mt-6 p-5"
+    >
       <div class="flex">
         <span class="text-cyan_darkeset">کد 4 رقمی را وارد کنید:</span>
       </div>
-      <div class="flex items-center justify-center mt-5 mb-3 h-10 pb-3 text-cyan_darkeset_200">
+      <div
+        class="flex items-center justify-center mt-5 mb-3 h-10 pb-3 text-cyan_darkeset_200"
+      >
         <input
           ref="num4"
           v-model="num4"
@@ -62,7 +66,9 @@
           <button
             @click="changeNumber()"
             class="text-green_flat mr-2 focus:outline-none"
-          >تغییر شماره</button>
+          >
+            تغییر شماره
+          </button>
         </div>
         <button
           @click="confirmCode()"
@@ -71,23 +77,28 @@
           <span class="flex items-center justify-center">
             <transition name="page" mode="out-in">
               <span class="content-around" v-if="!loading">ادامه</span>
-              <img class="h-6 content-between" v-else src="~/assets/images/loading-btn.svg" />
+              <img
+                class="h-6 content-between"
+                v-else
+                src="~/assets/images/loading-btn.svg"
+              />
             </transition>
           </span>
         </button>
       </div>
-      <div v-if="errors.password" class="text-sm text-right">
-        <div class="text-red-600" >* {{ errors.password[0] }}</div>
+      <!-- <div v-if="errors.password" class="text-sm text-right">
+        <div class="text-red-600">* {{ errors.password[0] }}</div>
       </div>
       <div v-if="errors.username" class="text-sm text-right">
-        <div class="text-red-600" >* {{ errors.username[0] }}</div>
-      </div>
+        <div class="text-red-600">* {{ errors.username[0] }}</div>
+      </div> -->
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 export default {
-  auth: 'guest',
   data() {
     return {
       mobile: "",
@@ -96,7 +107,7 @@ export default {
       num3: "",
       num2: "",
       num1: "",
-      loading: false
+      loading: false,
     };
   },
   watch: {
@@ -115,7 +126,7 @@ export default {
     num4() {
       if (this.num4.length > 0) this.$refs.num4.focus();
       else this.$refs.num3.focus();
-    }
+    },
   },
   created() {
     if (!this.$route.params.mobile) {
@@ -132,43 +143,20 @@ export default {
     changeNumber() {
       this.$router.push({ name: "login" });
     },
-    async confirmCode() {
-      const params = {
-        username: this.mobile,
-        password: this.num1 + this.num2 + this.num3 + this.num4,
-        forget_pass: this.forget_pass
-      };
-      try {
-        let response = await this.$auth.loginWith("authMakeup", {
-          data: params
+    confirmCode() {
+        const data = {
+          username: this.mobile,
+          password: this.num1 + this.num2 + this.num3 + this.num4,
+        };
+        this.$store.dispatch("login/submitLogin", data).then((res) => {
+          if (res === true) {
+            window.location.replace('/profile')
+          }
         });
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
-      // this.$axios.post('backend/api/v1/confirmCode',params).then(({data}) => {
-      //     console.log(data);
-      //     this.$auth.loginWith('laravelPassportPasswordGrant')
-      //     //this.$store.dispatch('user/login', data);
-      //     //this.$router.push({name:'panel'})
-
-      // })
-      // .catch(error => {
-      //     this.errors = [];
-      //     if (error.response.status === 422 ) {
-      //         this.errors = error.response.data.errors.active_code;
-      //     }
-      //     if (error.response.status === 401 ) {
-      //         this.errors = error.response.data.errors.active_code;
-      //     }
-      // })
-      // .finally(() =>{
-      //     this.loading = false;
-      // })
     },
 
-    authenticate() {}
-  }
+    authenticate() {},
+  },
 };
 </script>
 <style scoped>

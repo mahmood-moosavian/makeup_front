@@ -26,9 +26,10 @@ export default {
   ],
 
   plugins: [
-    './plugins/checkRoutes',
-    './plugins/mixins/validation',
-    './plugins/axios',
+    '~/plugins/checkRoutes',
+    '~/plugins/mixins/validation',
+    '~/plugins/axios',
+    '~/plugins/loadAuthenticationData.client',
   ],
 
   components: true,
@@ -40,28 +41,29 @@ export default {
   modules: [
     'cookie-universal-nuxt',
     '@nuxtjs/axios',
+    "@nuxtjs/proxy",
     '@nuxtjs/pwa',
   ],
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'fa'
     }
   },
 
   axios: {
     proxy: true,
-    baseURL: process.env.API_URL,
+    // baseURL: process.env.API_URL,
   },
   proxy: {
-    '/api': 'http://localhost:8000',//این url به دلایل امنتی از سورس حذف شده است
+    '/api': process.env.API_URL,
   },
   env: {
+    baseUrl: 'http://' + 'localhost:3000' + '/api/v1',
     authRoutes: [
       '/crud',
       { regex: [/\/profile/.source] },
-      { regex: [/\/user\//.source] }
-    ],
-    baseUrl: 'http://' + 'localhost:3000' + '/api/v1',
+      { regex: [/\/user/.source] }
+    ]
   },
   router: {
     middleware: [
@@ -69,34 +71,6 @@ export default {
       'load-auth'
     ]
   },
-  // proxy: {
-  //   '/backend': {
-  //     target: process.env.API_URL,
-  //     pathRewrite: { '^/backend': '/' },
-  //   },
-  // },
-  // auth: {
-  //   redirect: {
-  //     home: '/profile',
-  //     login: '/login',
-  //     logout: '/',
-  //   },
-  //   strategies: {
-  //     laravelPassportPasswordGrant: {
-  //       name: 'authMakeup',
-  //       provider: 'laravel/passport',
-  //       url: '/backend',
-  //       endpoints: {
-  //         token : '/api/v1/confirmCode',
-  //         user:{url:'/api/v1/user', method:'get'},
-  //         logout:{url: '/api/v1/logout', method: 'post'}
-  //       },
-  //       clientId: process.env.PASSPORT_CLIENT_ID,
-  //       clientSecret: process.env.PASSPORT_CLIENT_SECRET,
-  //       grantType: 'password',
-  //     },
-  //   },
-  // },
   build: {
-  }
+  },
 }

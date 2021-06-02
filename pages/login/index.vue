@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  auth: "guest",
+  // auth: "guest",
   transition: {
     name: "page",
     mode: "out-in",
@@ -78,7 +78,7 @@ export default {
       const params = { mobile: this.mobile };
 
       this.$axios
-        .post("backend/api/v1/entermobile", params)
+        .post("/api/v1/entermobile", params)
         .then((response) => {
           if (response.status === 201) {
             this.$router.push({ name: "login-confirm_code", params });

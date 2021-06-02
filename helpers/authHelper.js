@@ -5,9 +5,10 @@ export const loadAuth = async ({
   $checkRoutes,
   // route,
 }) => {
-  if (process.server) {
-    return false
-  }
+  
+  // if (process.server) {
+  //   return false
+  // }
   await store.dispatch('auth/initAuth')
   if ($checkRoutes.shouldInitAuth()) {
     const isAuthenticated = store.getters['auth/isAuthenticated']

@@ -10,6 +10,7 @@ export default function (context, inject) {
     })
   }
   inject('checkRoutes', {
+    
     shouldInitAuth() {
       return compare(process.env.authRoutes || [])
     },

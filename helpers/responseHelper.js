@@ -22,7 +22,7 @@ export const handleErrors = (e, cc, { error, redirect, store }) => {
   } else if (e?.response?.status === 401) {
     store.dispatch('auth/clearToken')
     if (goToLogin) {
-      redirect('/auth')
+      redirect('/login')
     }
   }
 }
